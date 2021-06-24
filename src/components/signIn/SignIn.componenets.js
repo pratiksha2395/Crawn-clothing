@@ -18,7 +18,7 @@ class SignIn extends React.Component{
         console.log(email)
         try {
             auth.signInWithEmailAndPassword(email, password)
-            this.state={email:'', password:''}
+            this.setState({email:'', password:''})
         } catch (error) {
             console.log("error in sign In ", error.message)
         }
@@ -39,7 +39,7 @@ class SignIn extends React.Component{
                     <FormInput type="password" label="password" name="password" value={this.state.password} handleChange={this.handleChange} required />
                     <div className="buttons">
                         <CustomButton type="submit" value="Sign In" onClick={this.handleSubmit} >Sign In</CustomButton>
-                        <CustomButton onClick ={signInWithGoogle} isGooglesignIn>Sign In with Google</CustomButton>
+                        <CustomButton  type="button" onClick ={signInWithGoogle} isGooglesignIn>Sign In with Google</CustomButton>
                     </div>
                     
                 </form>

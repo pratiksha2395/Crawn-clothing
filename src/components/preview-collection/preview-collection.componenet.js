@@ -8,8 +8,8 @@ const CollectionPreview=({title, items})=>{
         <div className="preview">
         {
             items.slice(0,4).map((item)=>{
-                const {id, ...other}= item
-                return <CollectionItem key={id} {...other}/>
+                
+                return <CollectionItem key={item.id} item={item}/>
             })
         }
         </div>

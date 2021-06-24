@@ -27,4 +27,13 @@
   &:hover {
     background-color: #555fff;
   }
+
+  &.inverted {
+    background-color: black;
+    color: white;
+  }
+  &:hover {
+    background-color: white;
+    color: black;
+  }
 }

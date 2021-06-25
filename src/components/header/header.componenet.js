@@ -10,6 +10,7 @@ import {selectCartHidden} from '../../redux/cart/cart.selectors'
 import {selectCurrentUser} from '../../redux/user/user.selectors'
 import {createStructuredSelector} from 'reselect'
 
+
 const Header =({currentuser, hidden})=>{
     console.log(currentuser)
     return (

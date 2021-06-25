@@ -10,3 +10,17 @@ export const AddItem =(item)=>{
         payload: item
     })
 }
+
+export const decreseItemQuantity = (item) =>{
+    return ({
+        type:CartActionTypes.DECREASE_IETEM_QUANTITY,
+        payload: item
+    })
+}
+
+export const RemoveItemFromCart = (item)=>{
+    return ({
+        type:CartActionTypes.REMOVE_ITEM_FROM_CART,
+        payload: item
+    })
+}

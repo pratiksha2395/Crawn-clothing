@@ -3,8 +3,11 @@ import './checkout-item.styles.scss'
 import {RemoveItemFromCart} from '../../redux/cart/cart.actions'
 import {connect} from 'react-redux'
 import {AddItem, decreseItemQuantity} from '../../redux/cart/cart.actions'
-
+import { useParams } from 'react-router-dom'
 const CheckOutItem =({cartItem , removeItem, AddItem, Decrease})=>{
+    console.log(cartItem)
+    const prams= useParams()
+    console.log(prams)
     const { name,  imageUrl, price, quantity} = cartItem
         return (<div className="checkout-item">
            <div className="image-container">
@@ -23,7 +26,7 @@ const CheckOutItem =({cartItem , removeItem, AddItem, Decrease})=>{
 
 const mapDispatchToProps = dispatch =>{
     return ({removeItem : item => dispatch(RemoveItemFromCart(item)),
-    AddItem : item=> dispatch(AddItem(item)),
+    AddItem : item => dispatch(AddItem(item)),
     Decrease: item=> dispatch(decreseItemQuantity(item)),
     }
 )}

@@ -12,7 +12,7 @@ import {createStructuredSelector} from 'reselect'
 
 
 const Header =({currentuser, hidden})=>{
-    console.log(currentuser)
+    
     return (
         <div className='header'>
             <Link className="logo-container" to="/">

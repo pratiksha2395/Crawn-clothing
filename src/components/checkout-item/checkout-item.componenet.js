@@ -5,9 +5,9 @@ import {connect} from 'react-redux'
 import {AddItem, decreseItemQuantity} from '../../redux/cart/cart.actions'
 import { useParams } from 'react-router-dom'
 const CheckOutItem =({cartItem , removeItem, AddItem, Decrease})=>{
-    console.log(cartItem)
+    
     const prams= useParams()
-    console.log(prams)
+    
     const { name,  imageUrl, price, quantity} = cartItem
         return (<div className="checkout-item">
            <div className="image-container">

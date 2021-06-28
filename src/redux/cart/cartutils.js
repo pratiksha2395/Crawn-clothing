@@ -20,7 +20,7 @@ export const DecreaseItemQuantity = (cartItems, itemToDecrease) => {
     if(existing.quantity === 1){
         return cartItems.filter (item => item.id !== itemToDecrease.id)
     }
-    console.log(existing)
+    
     if(existing){
         return cartItems.map(item =>
             item.id === itemToDecrease.id ? {...item, quantity: item.quantity-1} : item);

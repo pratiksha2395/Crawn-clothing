@@ -7,8 +7,7 @@ import { useParams } from 'react-router-dom'
 const CollectionItem = ({item, addItem})=>{
     console.log("hello")
     const { name, price, imageUrl} = item
-    const prams= useParams()
-    console.log(prams)
+    
     return (
     <div className="collection-item">
       <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />

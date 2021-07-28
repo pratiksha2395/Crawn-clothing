@@ -15,7 +15,7 @@ export const shopSelector = createSelector([selectshop],
 
 
 export const selectCollectionForPreview = createSelector([shopSelector],
-  collections => Object.keys(collections).map(key => collections[key]))
+  collections => collections ? Object.keys(collections).map(key => collections[key]) : [])
 // export const selectIdfromCollection = selectUrlParams => {
 
 //     console.log(selectUrlParams)
@@ -33,5 +33,9 @@ export const selectCollectionForPreview = createSelector([shopSelector],
 //     ) 
 //     }
 
-export const selectIdfromCollection = collectionUrlParam =>
-  createSelector([shopSelector], collections => collections[collectionUrlParam]);
+export const selectIdfromCollection =  memoize((collectionUrlParam) =>
+  createSelector(
+    [shopSelector],
+    (collections) => collections ? collections[collectionUrlParam] : null
+  )
+);

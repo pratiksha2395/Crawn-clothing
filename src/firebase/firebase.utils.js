@@ -22,7 +22,7 @@ export const createUserProfileDocument = async (userAuth, additionalData)=>{
     console.log(userRef)
     const snapshot = await userRef.get() //this method is use to take the user data
     //console.log(firestore.doc('/users/hjfdskffg344'))
-   
+    console.log(snapshot)
 
     if(!snapshot.exists){
         const {displayName, email} = userAuth
@@ -37,6 +37,35 @@ export const createUserProfileDocument = async (userAuth, additionalData)=>{
     }
     return userRef;
 }
+//To add the our shopdata to firebase
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd)=>{
+    const collectionRef = firestore.collection(collectionKey)
+    
+    const batch =firestore.batch()
+    objectsToAdd.forEach(obj => {
+        const newdocRef= collectionRef.doc()
+        batch.set(newdocRef, obj)
+    });
+    return await batch.commit()
+}
+
+export const convertCollectionsSnapshotToMpas= collections =>{
+    const transformedCollection = collections.docs.map(doc =>{
+        const {title, items} =doc.data()
+
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            id:doc.id,
+            title,
+            items
+        }
+    })
+    console.log(transformedCollection)
+    return transformedCollection.reduce((accumulator, collection)=>{
+        accumulator[collection.title.toLowerCase()]= collection
+        return accumulator
+    }, {})
+}
 
 //initialising the firebase 
 firebase.initializeApp(config);
@@ -45,6 +74,9 @@ firebase.initializeApp(config);
 export const auth = firebase.auth();
 //adding cloud firestore
 export const firestore = firebase.firestore();
+
+
+
 
 //creating the instance of google provider
 const provider = new firebase.auth.GoogleAuthProvider()

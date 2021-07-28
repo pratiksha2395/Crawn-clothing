@@ -9,32 +9,32 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.componenet'
 import {selectCartHidden} from '../../redux/cart/cart.selectors'
 import {selectCurrentUser} from '../../redux/user/user.selectors'
 import {createStructuredSelector} from 'reselect'
-
+import {HeaderContainer, OptionsContainer, LogoContainer, OptionLink, OptionDiv} from './header.styled'
 
 const Header =({currentuser, hidden})=>{
     
     return (
-        <div className='header'>
-            <Link className="logo-container" to="/">
+        <HeaderContainer>
+            <LogoContainer to="/">
                <Logo className="logo" /> 
-            </Link>
-            <div className="options">
-                <Link to="/shop" className="option"> Shop</Link>
-                 <Link to="/shop" className="option"> Contact</Link>
+            </LogoContainer>
+            <OptionsContainer>
+                <OptionLink to="/shop" > Shop</OptionLink>
+                 <OptionLink to="/shop" > Contact</OptionLink>
                  {
                     
                     currentuser ?
-                    <div onClick={()=> auth.signOut()} className="option"> SignOut </div> :
-                    <Link to="/signin" className="option">Sign In</Link>
+                    <OptionDiv onClick={()=> auth.signOut()} > SignOut </OptionDiv> :
+                    <OptionLink to="/signin" >Sign In</OptionLink>
 
                  }
                  <CartIcon />
-            </div>
+            </OptionsContainer>
             {
                 hidden ? null :  <CartDropdown />
             }
            
-        </div>
+        </HeaderContainer>
     )
 }
 

@@ -5,12 +5,14 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import ShopPage from './pages/shop/shop.componenet'
 import Header from './components/header/header.componenet';
 import SignInAndSignUp from './pages/signin-signup/signin-signup'
-import {auth, createUserProfileDocument} from './firebase/firebase.utils'
+import {auth, createUserProfileDocument, addCollectionAndDocuments} from './firebase/firebase.utils'
 import {connect} from 'react-redux'
+import {selectCollectionForPreview} from './redux/shop/shop.selectors'
 import  {setCurrentUser}  from './redux/user/user.actions'
 import {selectCurrentUser} from './redux/user/user.selectors'
 import {createStructuredSelector} from 'reselect'
 import Checkout from './components/checkout/checkout.componenet'
+
 
 // import "firebase/auth";
 
@@ -20,10 +22,10 @@ class App extends React.Component {
 
   componentDidMount(){
     
-    
-    
-    this.unsubscribeFromAuth=  auth.onAuthStateChanged(async userAuth =>{
+    const {collectionsArray, setCurrentUser} = this.props
+    this.unsubscribeFromAuth =  auth.onAuthStateChanged(async userAuth =>{
       // this.setState ({currentuser : user})
+      console.log(userAuth)
       if(userAuth){
         const userRef= await createUserProfileDocument(userAuth)
 
@@ -36,8 +38,11 @@ class App extends React.Component {
         });
         
       }
-      this.props.setCurrentUser(userAuth);
+      setCurrentUser(userAuth);
+      //use to add shop data programatically to our firebase
+      //addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items}) ))
     });
+   
   }
 
   componentWillUnmount(){
@@ -60,11 +65,13 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentuser:selectCurrentUser
+  currentuser:selectCurrentUser,
+  //collectionsArray:selectCollectionForPreview,
+  
 })
 
 const mapDispatchToProps = dispatch =>{
-  console.log(dispatch)
+
   return ({
   setCurrentUser : user => dispatch(setCurrentUser(user))
 })};
